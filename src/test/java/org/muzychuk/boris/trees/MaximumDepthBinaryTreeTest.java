@@ -17,6 +17,8 @@ class MaximumDepthBinaryTreeTest {
         assertEquals(0, maximumDepthBinaryTree.maxDepth(null));
         assertEquals(3, maximumDepthBinaryTree.maxDepth(root));
 
+        assertEquals(0, maximumDepthBinaryTree.computeMaxDepth(null));
+        assertEquals(3, maximumDepthBinaryTree.computeMaxDepth(root));
     }
 
 }
