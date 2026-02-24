@@ -1,0 +1,35 @@
+package org.muzychuk.boris.trees;
+
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
+public class BalancedBinaryTree {
+
+    public boolean isBalanced(TreeNode root) {
+        Deque<TreeNode> stack = new LinkedList<>();
+        TreeNode node = root, last = null;
+        Map<TreeNode, Integer> depths = new HashMap<>();
+        while (!stack.isEmpty() || node != null) {
+            if (node != null) {
+                stack.push(node);
+                node = node.left;
+            } else {
+                node = stack.peek();
+                if (node.right == null || last == node.right) {
+                    stack.pop();
+                    int left = depths.getOrDefault(node.left, 0);
+                    int right = depths.getOrDefault(node.right, 0);
+                    if (Math.abs(left - right) > 1) return false;
+                    depths.put(node, 1 + Math.max(left, right));
+                    last = node;
+                    node = null;
+                } else {
+                    node = node.right;
+                }
+            }
+        }
+        return true;
+    }
+}
