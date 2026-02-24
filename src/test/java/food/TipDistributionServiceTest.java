@@ -17,9 +17,13 @@ class TipDistributionServiceTest {
     void distribute() {
         DistributionResult result = tipDistributionService.distribute(100,
                 new Delivery(1L, 2L, 3L, false));
-        assertEquals(new BigDecimal("5.00"), result.result().get(Partner.PLATFORM));
-        assertEquals(new BigDecimal("10.0"), result.result().get(Partner.RESTAURANT));
-        assertEquals(new BigDecimal("85.00"), result.result().get(Partner.COURIER));
+        BigDecimal platformTip = result.result().get(Partner.PLATFORM);
+        assertEquals(new BigDecimal("5.00"), platformTip);
+        BigDecimal restaurantTip = result.result().get(Partner.RESTAURANT);
+        assertEquals(new BigDecimal("10.0"), restaurantTip);
+        BigDecimal courierTip = result.result().get(Partner.COURIER);
+        assertEquals(new BigDecimal("85.00"), courierTip);
+        assertEquals(new BigDecimal("100.00"), platformTip.add(restaurantTip).add(courierTip));
     }
 
     @Test
