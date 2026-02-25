@@ -11,19 +11,21 @@ public class CourierTipCalculationStrategy implements TipCalculationStrategy {
 
     @Override
     public void calculateTip(long tipAmount, Delivery delivery, Map<Partner, BigDecimal> result) {
+        BigDecimal resultTip;
         // можно упростить
         if (delivery.isHardDelivery()) {
             if (delivery.restaurantId() != null) {
-                result.put(Partner.COURIER, new BigDecimal("0.9").multiply(new BigDecimal(tipAmount)));
+                resultTip = new BigDecimal("0.9").multiply(new BigDecimal(tipAmount));
             } else {
-                result.put(Partner.COURIER, new BigDecimal(tipAmount));
+                resultTip = new BigDecimal(tipAmount);
             }
         } else {
             if (delivery.restaurantId() != null) {
-                result.put(Partner.COURIER, new BigDecimal("0.85").multiply(new BigDecimal(tipAmount)));
+                resultTip = new BigDecimal("0.85").multiply(new BigDecimal(tipAmount));
             } else {
-                result.put(Partner.COURIER, new BigDecimal("0.95").multiply(new BigDecimal(tipAmount)));
+                resultTip = new BigDecimal("0.95").multiply(new BigDecimal(tipAmount));
             }
         }
+        result.put(Partner.COURIER, resultTip);
     }
 }
