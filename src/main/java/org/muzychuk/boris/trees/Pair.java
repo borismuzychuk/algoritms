@@ -1,4 +1,4 @@
 package org.muzychuk.boris.trees;
 
-public record Pair<X, Y>(X key, Y value) {
+public record Pair<K, V>(K key, V value) {
 }
