@@ -15,19 +15,24 @@ public class TokenBucketRateLimiter implements RateLimiter {
 
     private final RateLimitConfig config;
     private final ScheduledExecutorService scheduledExecutorService;
-    private final Queue<Token> bucket = new ConcurrentLinkedQueue<>();
+    private final Queue<Token> bucket;
     private final Object lock;
 
     public TokenBucketRateLimiter(RateLimitConfig config) {
         this.config = config;
         this.scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        this.lock = new Object();
+        this.bucket = new ConcurrentLinkedQueue<>();
+        scheduledFillTokenBucket(config);
+    }
+
+    private void scheduledFillTokenBucket(RateLimitConfig config) {
         this.scheduledExecutorService.scheduleAtFixedRate(() -> {
                     while (bucket.size() < config.maxRequests()) {
                         bucket.add(new Token(System.currentTimeMillis()));
                     }
                 },
                 0, config.windowMs(), TimeUnit.MINUTES);
-        this.lock = new Object();
     }
 
     @Override
