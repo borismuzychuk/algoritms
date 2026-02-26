@@ -37,6 +37,7 @@ public class TokenBucketRateLimiter implements RateLimiter {
 
     @Override
     public RateLimitResult tryAcquire(String clientId) {
+        // думаю синхронизация здесь нужна, потому что без нее могут быть проблемы с публикацией объекта RateLimitResult()
         synchronized (lock) {
             if (bucket.isEmpty()) {
                 return new RateLimitResult(false, 0, config.windowMs());
