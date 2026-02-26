@@ -32,7 +32,7 @@ public class TokenBucketRateLimiter implements RateLimiter {
                         bucket.add(new Token(System.currentTimeMillis()));
                     }
                 },
-                0, config.windowMs(), TimeUnit.MINUTES);
+                0, config.windowMs(), TimeUnit.MILLISECONDS);
     }
 
     @Override
