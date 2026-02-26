@@ -16,6 +16,7 @@ public class TokenBucketRateLimiter implements RateLimiter {
     private final RateLimitConfig config;
     private final ScheduledExecutorService scheduledExecutorService;
     private final Queue<Token> bucket = new ConcurrentLinkedQueue<>();
+    private final Object lock;
 
     public TokenBucketRateLimiter(RateLimitConfig config) {
         this.config = config;
@@ -27,13 +28,16 @@ public class TokenBucketRateLimiter implements RateLimiter {
                     }
                 },
                 0, config.windowMs(), TimeUnit.MINUTES);
+        this.lock = new Object();
     }
 
     @Override
     public RateLimitResult tryAcquire(String clientId) {
-        if (bucket.isEmpty()) {
-            return new RateLimitResult(false, 0, config.windowMs());
+        synchronized (lock) {
+            if (bucket.isEmpty()) {
+                return new RateLimitResult(false, 0, config.windowMs());
+            }
+            return new RateLimitResult(true, bucket.size(), 0);
         }
-        return new RateLimitResult(true, bucket.size(), 0);
     }
 }

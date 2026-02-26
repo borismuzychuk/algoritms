@@ -6,8 +6,8 @@ import org.muzychuk.boris.ratelimmiter.config.RateLimitConfig;
 import org.muzychuk.boris.ratelimmiter.domain.ClientTier;
 import org.muzychuk.boris.ratelimmiter.domain.RateLimitResult;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PriorityTokenBucketRateLimiter implements RateLimiter {
 
@@ -17,7 +17,7 @@ public class PriorityTokenBucketRateLimiter implements RateLimiter {
     //For Test
     public PriorityTokenBucketRateLimiter() {
         clientTypeResolver = new ClientTypeResolver();
-        rateLimiterMap = new HashMap<>();
+        rateLimiterMap = new ConcurrentHashMap<>();
         rateLimiterMap.put(ClientTier.FREE, new TokenBucketRateLimiter(
                 new RateLimitConfig(ClientTier.FREE.getMaxRequests(), ClientTier.FREE.getWindowMs())));
         rateLimiterMap.put(ClientTier.STANDARD, new TokenBucketRateLimiter(

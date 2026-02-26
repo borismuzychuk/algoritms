@@ -6,15 +6,15 @@ import org.muzychuk.boris.ratelimmiter.impl.PriorityFixedWindowRateLimiter;
 import org.muzychuk.boris.ratelimmiter.impl.PrioritySlidingWindowRateLimiter;
 import org.muzychuk.boris.ratelimmiter.impl.PriorityTokenBucketRateLimiter;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class RateLimiterFactory {
 
     private final Map<String, RateLimiter> rateLimitersMap;
 
     public RateLimiterFactory() {
-        rateLimitersMap = new HashMap<>();
+        rateLimitersMap = new ConcurrentHashMap<>();
         rateLimitersMap.put(RateLimiterType.TOKEN_BUCKET.getName(), new PriorityTokenBucketRateLimiter());
         rateLimitersMap.put(RateLimiterType.FIXED_WINDOW.getName(), new PriorityFixedWindowRateLimiter());
         rateLimitersMap.put(RateLimiterType.SLIDING_WINDOW.getName(), new PrioritySlidingWindowRateLimiter());

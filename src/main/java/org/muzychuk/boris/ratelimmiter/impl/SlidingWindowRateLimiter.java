@@ -11,23 +11,27 @@ public class SlidingWindowRateLimiter implements RateLimiter {
 
     private final RateLimitConfig config;
     private final Queue<Long> logTimestamps;
+    private final Object lock;
 
     public SlidingWindowRateLimiter(RateLimitConfig config) {
         this.config = config;
         this.logTimestamps = new ConcurrentLinkedQueue<>();
+        this.lock = new Object();
     }
 
     @Override
     public RateLimitResult tryAcquire(String clientId) {
-        long now = System.currentTimeMillis();
-        long start = now - config.windowMs();
-        while (!logTimestamps.isEmpty() && logTimestamps.peek() < start) {
-            logTimestamps.poll();
+        synchronized (lock) {
+            long now = System.currentTimeMillis();
+            long start = now - config.windowMs();
+            while (!logTimestamps.isEmpty() && logTimestamps.peek() < start) {
+                logTimestamps.poll();
+            }
+            if (logTimestamps.size() < config.maxRequests()) {
+                logTimestamps.add(now);
+                return new RateLimitResult(true, config.maxRequests() - logTimestamps.size(), 0);
+            }
+            return new RateLimitResult(false, 0, config.windowMs());
         }
-        if (logTimestamps.size() < config.maxRequests()) {
-            logTimestamps.add(now);
-            return new RateLimitResult(true, config.maxRequests() - logTimestamps.size(), 0);
-        }
-        return new RateLimitResult(false, 0, config.windowMs());
     }
 }
