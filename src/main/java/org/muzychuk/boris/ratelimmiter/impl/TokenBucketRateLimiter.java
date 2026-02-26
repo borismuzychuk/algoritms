@@ -20,7 +20,6 @@ public class TokenBucketRateLimiter implements RateLimiter {
 
     public TokenBucketRateLimiter(RateLimitConfig config) {
         this.config = config;
-        // TODO вынести инициализацию scheduler'а из конструктора
         this.scheduledExecutorService = Executors.newScheduledThreadPool(1);
         this.scheduledExecutorService.scheduleAtFixedRate(() -> {
                     while (bucket.size() < config.maxRequests()) {
