@@ -18,7 +18,8 @@ public class RequestHandler {
     }
 
     public void handle(RequestDto request) {
-        RateLimitResult rateLimitResult = rateLimiterFactory.getRateLimiter(rateLimiterType.getName()).tryAcquire(request.clientId());
+        RateLimitResult rateLimitResult = rateLimiterFactory.getRateLimiter(rateLimiterType.getName())
+                .tryAcquire(request.clientId());
         // todo handle rate limiter result
     }
 
