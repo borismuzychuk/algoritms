@@ -1,0 +1,39 @@
+package org.muzychuk.boris.ratelimmiter.impl;
+
+import org.muzychuk.boris.ratelimmiter.RateLimiter;
+import org.muzychuk.boris.ratelimmiter.config.RateLimitConfig;
+import org.muzychuk.boris.ratelimmiter.domain.RateLimitResult;
+import org.muzychuk.boris.ratelimmiter.domain.Token;
+
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+public class TokenBucketRateLimiter implements RateLimiter {
+
+    private final RateLimitConfig config;
+    private final ScheduledExecutorService scheduledExecutorService;
+    private final Queue<Token> bucket = new ConcurrentLinkedQueue<>();
+
+    public TokenBucketRateLimiter(RateLimitConfig config) {
+        this.config = config;
+        // TODO вынести инициализацию scheduler'а из конструктора
+        this.scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        this.scheduledExecutorService.scheduleAtFixedRate(() -> {
+                    while (bucket.size() < config.maxRequests()) {
+                        bucket.add(new Token(System.currentTimeMillis()));
+                    }
+                },
+                0, config.windowMs(), TimeUnit.MINUTES);
+    }
+
+    @Override
+    public RateLimitResult tryAcquire(String clientId) {
+        if (bucket.isEmpty()) {
+            return new RateLimitResult(false, 0, config.windowMs());
+        }
+        return new RateLimitResult(true, bucket.size(), 0);
+    }
+}
