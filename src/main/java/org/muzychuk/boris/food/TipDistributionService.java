@@ -1,12 +1,12 @@
-package food;
+package org.muzychuk.boris.food;
 
-import food.domain.Delivery;
-import food.domain.DistributionResult;
-import food.domain.Partner;
-import food.tip.strategies.TipCalculationStrategy;
-import food.tip.strategies.impl.CourierTipCalculationStrategy;
-import food.tip.strategies.impl.PlatformTipCalculationStrategy;
-import food.tip.strategies.impl.RestaurantTipCalculationStrategy;
+import org.muzychuk.boris.food.domain.Delivery;
+import org.muzychuk.boris.food.domain.DistributionResult;
+import org.muzychuk.boris.food.domain.Partner;
+import org.muzychuk.boris.food.tip.strategies.TipCalculationStrategy;
+import org.muzychuk.boris.food.tip.strategies.impl.CourierTipCalculationStrategy;
+import org.muzychuk.boris.food.tip.strategies.impl.PlatformTipCalculationStrategy;
+import org.muzychuk.boris.food.tip.strategies.impl.RestaurantTipCalculationStrategy;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

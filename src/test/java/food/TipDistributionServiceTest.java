@@ -1,8 +1,9 @@
 package food;
 
-import food.domain.Delivery;
-import food.domain.DistributionResult;
-import food.domain.Partner;
+import org.muzychuk.boris.food.TipDistributionService;
+import org.muzychuk.boris.food.domain.Delivery;
+import org.muzychuk.boris.food.domain.DistributionResult;
+import org.muzychuk.boris.food.domain.Partner;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TipDistributionServiceTest {
 
-    private TipDistributionService tipDistributionService = new TipDistributionService();
+    private final TipDistributionService tipDistributionService = new TipDistributionService();
 
     @Test
     void distribute() {

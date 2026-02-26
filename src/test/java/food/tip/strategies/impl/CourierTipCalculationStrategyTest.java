@@ -1,8 +1,9 @@
 package food.tip.strategies.impl;
 
-import food.domain.Delivery;
-import food.domain.Partner;
+import org.muzychuk.boris.food.domain.Delivery;
+import org.muzychuk.boris.food.domain.Partner;
 import org.junit.jupiter.api.Test;
+import org.muzychuk.boris.food.tip.strategies.impl.CourierTipCalculationStrategy;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CourierTipCalculationStrategyTest {
 
-    private CourierTipCalculationStrategy courierTipCalculationStrategy = new CourierTipCalculationStrategy();
+    private final CourierTipCalculationStrategy courierTipCalculationStrategy = new CourierTipCalculationStrategy();
 
     @Test
     void whenDeliveryIsNotHard_ThenReturnStandardTip() {

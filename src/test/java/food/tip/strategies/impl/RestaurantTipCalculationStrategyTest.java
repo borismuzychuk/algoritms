@@ -1,8 +1,9 @@
 package food.tip.strategies.impl;
 
-import food.domain.Delivery;
-import food.domain.Partner;
+import org.muzychuk.boris.food.domain.Delivery;
+import org.muzychuk.boris.food.domain.Partner;
 import org.junit.jupiter.api.Test;
+import org.muzychuk.boris.food.tip.strategies.impl.RestaurantTipCalculationStrategy;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RestaurantTipCalculationStrategyTest {
 
-    private RestaurantTipCalculationStrategy restaurantTipCalculationStrategy
+    private final RestaurantTipCalculationStrategy restaurantTipCalculationStrategy
             = new RestaurantTipCalculationStrategy();
 
     @Test

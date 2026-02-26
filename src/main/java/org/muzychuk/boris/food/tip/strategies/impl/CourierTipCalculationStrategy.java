@@ -1,8 +1,8 @@
-package food.tip.strategies.impl;
+package org.muzychuk.boris.food.tip.strategies.impl;
 
-import food.domain.Delivery;
-import food.domain.Partner;
-import food.tip.strategies.TipCalculationStrategy;
+import org.muzychuk.boris.food.domain.Delivery;
+import org.muzychuk.boris.food.domain.Partner;
+import org.muzychuk.boris.food.tip.strategies.TipCalculationStrategy;
 
 import java.math.BigDecimal;
 import java.util.Map;

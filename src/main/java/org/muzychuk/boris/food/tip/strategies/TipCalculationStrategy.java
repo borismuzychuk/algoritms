@@ -1,7 +1,7 @@
-package food.tip.strategies;
+package org.muzychuk.boris.food.tip.strategies;
 
-import food.domain.Delivery;
-import food.domain.Partner;
+import org.muzychuk.boris.food.domain.Delivery;
+import org.muzychuk.boris.food.domain.Partner;
 
 import java.math.BigDecimal;
 import java.util.Map;

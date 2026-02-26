@@ -1,4 +1,4 @@
-package food.domain;
+package org.muzychuk.boris.food.domain;
 
 public record Delivery(
         Long orderId,
