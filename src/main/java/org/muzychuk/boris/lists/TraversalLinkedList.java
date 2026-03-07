@@ -7,10 +7,11 @@ public class TraversalLinkedList {
 
     public List<ListNode> traverse(ListNode node) {
         List<ListNode> nodes = new ArrayList<>();
-        while (node != null) {
-            System.out.println("Processing node Node with val: " + node.val);
-            nodes.add(node);
-            node = node.next;
+        ListNode currentNode = node;
+        while (currentNode != null) {
+            System.out.println("Processing node Node with val: " + currentNode.val);
+            nodes.add(currentNode);
+            currentNode = currentNode.next;
         }
         return nodes;
     }
