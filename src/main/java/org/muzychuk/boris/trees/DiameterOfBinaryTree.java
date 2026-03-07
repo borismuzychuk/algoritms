@@ -13,10 +13,10 @@ public class DiameterOfBinaryTree {
         if (node == null) {
             return 0;
         }
-        int leftHeigth = dfs(node.left, res);
-        int rightHeigth = dfs(node.right, res);
-        res[0] = Math.max(res[0], leftHeigth + rightHeigth);
-        return 1 + Math.max(leftHeigth, rightHeigth);
+        int leftHeight = dfs(node.left, res);
+        int rightHeight = dfs(node.right, res);
+        res[0] = Math.max(res[0], leftHeight + rightHeight);
+        return 1 + Math.max(leftHeight, rightHeight);
     }
 
 }
