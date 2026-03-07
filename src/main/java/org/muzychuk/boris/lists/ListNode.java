@@ -1,5 +1,7 @@
 package org.muzychuk.boris.lists;
 
+import java.util.Objects;
+
 public class ListNode {
 
     int val;
@@ -20,5 +22,17 @@ public class ListNode {
     @Override
     public String toString() {
         return " val = " + val;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ListNode listNode = (ListNode) o;
+        return val == listNode.val;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(val);
     }
 }
