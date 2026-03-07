@@ -1,5 +1,7 @@
 package org.muzychuk.boris.trees;
 
+import java.util.Objects;
+
 public class TreeNode {
 
     int val;
@@ -19,4 +21,15 @@ public class TreeNode {
         this.right = right;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        TreeNode treeNode = (TreeNode) o;
+        return val == treeNode.val;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(val);
+    }
 }
