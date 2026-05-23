@@ -13,20 +13,52 @@ public class DepthFirstSearch {
         return values;
     }
 
+    public int count(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + count(root.left) + count(root.right);
+    }
+
+    // без сортировки
+    public TreeNode find(TreeNode root, int value) {
+        if (root == null) {
+            return null;
+        }
+        if (root.val == value) {
+            return root;
+        }
+        TreeNode result = find(root.left, value);
+        if (result != null) {
+            return result;
+        } else {
+            return find(root.right, value);
+        }
+    }
+
+
+    public TreeNode findForSort(TreeNode root, int value) {
+
+        if (root == null) {
+            return null;
+        }
+
+        if (root.val == value) {
+            return root;
+        }
+
+        if (root.val > value) {
+            return findForSort(root.left, value);
+        } else {
+            return findForSort(root.right, value);
+        }
+
+    }
+
     public List<Integer> iterativeTraverse(TreeNode root) {
         List<Integer> values = new ArrayList<>();
         iterativeDsf(root, values);
         return values;
-    }
-
-    private void dsf(TreeNode node, List<Integer> values) {
-        if (node == null) {
-            return;
-        }
-        System.out.println("Processing node with val: " + node.val);
-        values.add(node.val);
-        dsf(node.left, values);
-        dsf(node.right, values);
     }
 
     private void iterativeDsf(TreeNode node, List<Integer> values) {
@@ -42,5 +74,15 @@ public class DepthFirstSearch {
         }
     }
 
+
+    private void dsf(TreeNode node, List<Integer> values) {
+        if (node == null) {
+            return;
+        }
+        System.out.println("Processing node with val: " + node.val);
+        values.add(node.val);
+        dsf(node.left, values);
+        dsf(node.right, values);
+    }
 
 }
