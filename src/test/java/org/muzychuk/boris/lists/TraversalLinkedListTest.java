@@ -2,8 +2,6 @@ package org.muzychuk.boris.lists;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,5 +29,41 @@ class TraversalLinkedListTest {
         // [5, -4, 0, 1, 7]
         List<ListNode> expected = List.of(listNode1, listNode2, listNode3, listNode4, listNode5);
         assertEquals(expected, traversalLinkedList.traverse(listNode1));
+    }
+
+    @Test
+    void count() {
+        ListNode root = new ListNode();
+        root.val = 42;
+        ListNode second = new ListNode();
+        second.val = 43;
+        root.next = second;
+        ListNode third = new ListNode();
+        second.val = 44;
+        second.next = third;
+        ListNode fourth = new ListNode();
+        third.val = 45;
+        third.next = fourth;
+
+        TraversalLinkedList listNodeCounter = new TraversalLinkedList();
+        assertEquals(4, listNodeCounter.count(root));
+    }
+
+    @Test
+    void countRecursive() {
+        ListNode root = new ListNode();
+        root.val = 42;
+        ListNode second = new ListNode();
+        second.val = 43;
+        root.next = second;
+        ListNode third = new ListNode();
+        second.val = 44;
+        second.next = third;
+        ListNode fourth = new ListNode();
+        third.val = 45;
+        third.next = fourth;
+
+        TraversalLinkedList listNodeCounter = new TraversalLinkedList();
+        assertEquals(4, listNodeCounter.countRecursive(root));
     }
 }

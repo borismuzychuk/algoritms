@@ -16,4 +16,23 @@ public class TraversalLinkedList {
         return nodes;
     }
 
+    public int countRecursive(ListNode node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + countRecursive(node.next);
+    }
+
+    public int count(ListNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int count = 0;
+        while (node != null) {
+            node = node.next;
+            count++;
+        }
+        return count;
+    }
+
 }
